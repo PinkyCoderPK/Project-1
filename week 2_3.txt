@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int k ,n;
+long long c[1005][1005];
+const int mod = 1e9+7;
+
+int main()
+{
+    //Week 2 - Compute C_k_n
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> k >> n;
+    for (int i = 0; i <= n; i++)
+        c[0][i] = 1;
+    for (int i = 1; i <= k; i++)
+        for (int j = 1; j <= n; j++)
+            c[i][j] = (c[i-1][j-1] + c[i][j-1])%mod;
+    cout << c[k][n];
+}

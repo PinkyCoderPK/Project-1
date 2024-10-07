@@ -1,0 +1,139 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int a[10][10], ans = 0;
+bool check(int u, int v,int val)
+{
+    for (int i = 1; i <= 9; i++)
+        if ( i != v && a[u][i] == val ) return false;
+    for (int i = 1; i <= 9; i++)
+        if ( i != u && a[i][v] == val ) return false;
+
+    if ( u >= 1 && u <= 3 )
+    {
+        if ( v >= 1 && v <= 3 )
+        {
+            for (int i = 1; i <= 3; i++)
+                for (int j = 1; j <= 3; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else if ( v >= 4 && v <= 6 )
+        {
+            for (int i = 1; i <= 3; i++)
+                for (int j = 4; j <= 6; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else
+        {
+            for (int i = 1; i <= 3; i++)
+                for (int j = 7; j <= 9; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+    }
+    else if ( u >= 4 && u <= 6 )
+    {
+        if ( v >= 1 && v <= 3 )
+        {
+            for (int i = 4; i <= 6; i++)
+                for (int j = 1; j <= 3; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else if ( v >= 4 && v <= 6 )
+        {
+            for (int i = 4; i <= 6; i++)
+                for (int j = 4; j <= 6; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else
+        {
+            for (int i = 4; i <= 6; i++)
+                for (int j = 7; j <= 9; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+    }
+    else
+    {
+        if ( v >= 1 && v <= 3 )
+        {
+            for (int i = 7; i <= 9; i++)
+                for (int j = 1; j <= 3; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else if ( v >= 4 && v <= 6 )
+        {
+            for (int i = 7; i <= 9; i++)
+                for (int j = 4; j <= 6; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+        else
+        {
+            for (int i = 7; i <= 9; i++)
+                for (int j = 7; j <= 9; j++)
+                    if ( (i != u || j != v)
+                        && a[i][j] == val ) return false;
+        }
+    }
+    return true;
+}
+
+void solve(int u,int v)
+{
+    if ( a[u][v] == 0 )
+    {
+        for (int val = 1; val <= 9; val++)
+        {
+            if ( check(u,v,val) )
+            {
+                a[u][v] = val;
+                if ( u == 9 && v == 9)
+                {
+                    /*for (int i = 1; i <= 9; i++)
+                    {
+                        for (int j = 1; j <= 9; j++)
+                            cout << a[i][j] <<" ";
+                        cout <<"\n";
+                    }
+                    cout <<"\n";*/
+                    ans++;
+                }
+                else
+                {
+                    if ( v < 9 ) solve(u, v+1);
+                    else if ( u < 9 ) solve (u+1, 1);
+                }
+                a[u][v] = 0;
+            }
+        }
+
+    }
+    else
+    {
+       if ( v < 9 ) solve(u, v+1);
+       else if ( u < 9 ) solve (u+1, 1);
+    }
+}
+
+int main()
+{
+    //Week 2 - Count number of sudoku solutions
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    for (int i = 1; i <= 9; i++)
+        for (int j = 1; j <= 9; j++)
+            cin >> a[i][j];
+    solve(1,1);
+
+    cout << ans;
+}

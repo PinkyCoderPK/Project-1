@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n;
+
+int main()
+{
+    //Week 2 - Binary sequence generation
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> n;
+    for (int i = 0; i < (1<<n); i++)
+    {
+        for (int j = n-1; j >= 0; j--)
+            cout << ((i>>j)&1);
+        cout <<"\n";
+    }
+}
