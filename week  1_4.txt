@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s;
+int check = 0, count_s = 0;
+int hours = 0, minutes = 0, seconds = 0;
+
+int main()
+{
+    //Week 1 - Convert hh:mm:ss to seconds
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    getline(cin,s);
+    if ( s.size() != 8 )
+    {
+        cout << "INCORRECT";
+        return 0;
+    }
+    for (int i = 0; i < s.size(); i++)
+    {
+        if ( s[i] == ':' )
+        {
+            if ( check != 2 )
+            {
+                cout << "INCORRECT";
+                return 0;
+            }
+            count_s ++;
+            check = 0;
+        }
+        else
+        {
+            check ++;
+            if ( count_s == 0 )
+                hours = hours * 10 + s[i] - 48;
+            else if ( count_s == 1 )
+                minutes = minutes * 10 + s[i] - 48;
+            else
+                seconds = seconds * 10 + s[i] - 48;
+        }
+        if ( count_s > 2 || hours > 23 || minutes > 59 || seconds > 59 )
+        {
+            cout << "INCORRECT";
+            return 0;
+        }
+    }
+
+    if ( count_s == 2 &&
+        (hours >= 0 && hours <= 23) &&
+        (minutes >= 0 && minutes <= 59) &&
+        (seconds >= 0 && seconds <= 59) )
+        cout << hours * 3600 + minutes * 60 + seconds;
+    else
+        cout << "INCORRECT";
+}

@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+double kwh;
+double money1 = 0, money2 = 0;
+
+int main()
+{
+    //Week 1 - So sánh chênh lệch giá điện theo đề xuất mới của EVN
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> kwh;
+    if ( kwh > 400 ) // Mức 6
+        money1 = 50*(1.728+1.786) + 100*(2.074+2.612+2.919) + (kwh-400)*3.015;
+    else if ( kwh > 300 ) // Mức 5
+        money1 = 50*(1.728+1.786) + 100*(2.074+2.612) + (kwh-300)*2.919;
+    else if ( kwh > 200 ) // Mức 4
+        money1 = 50*(1.728+1.786) + 100*2.074 + (kwh-200)*2.612;
+    else if ( kwh > 100 ) // Mức 3
+        money1 = 50*(1.728+1.786) + (kwh-100)*2.074;
+    else if ( kwh > 50 ) // Mức 2
+        money1 = 50*1.728 + (kwh-50)*1.786;
+    else // Mức 1
+        money1 = kwh*1.728;
+    money1 *= 1000;
+    money1 = money1 + money1/10;
+
+    if ( kwh > 700 ) // Mức 5
+        money2 = 100*(1.728+2.074) + 200*2.612 + 300*3.111 + (kwh-700)*3.457;
+    else if ( kwh > 400 ) // Mức 4
+        money2 = 100*(1.728+2.074) + 200*2.612 + (kwh-400)*3.111;
+    else if ( kwh > 200 ) // Mức 3
+        money2 = 100*(1.728+2.074) + (kwh-200)*2.612;
+    else if ( kwh > 100 ) // Mức 2
+        money2 = 100*1.728 + (kwh-100)*2.074;
+    else // Mức 1
+        money2 = kwh*1.728;
+    money2 *= 1000;
+    money2 = money2 +  money2/10;
+
+    cout << fixed << setprecision(2) << money2 - money1;
+
+}

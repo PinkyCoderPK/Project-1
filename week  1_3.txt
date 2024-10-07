@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s;
+
+int main()
+{
+    //Week 1 - Convert a TEXT to Upper-Case
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    while (getline(cin,s))
+    {
+        for (int i = 0; i < s.size(); i++)
+            if ( s[i] >= 'a' && s[i] <= 'z' ) s[i] -= 32;
+        cout << s <<'\n';
+    }
+}

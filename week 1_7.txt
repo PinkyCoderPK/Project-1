@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s;
+int day, month, year;
+int count_s = 0, check = 0;
+
+int main()
+{
+    //Week 1 - Extract Year, Month, Date from a String YYYY-MM-DD
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    getline(cin,s);
+    for (int i = 0; i < s.size(); i++)
+    {
+        if ( s[i] == '-' )
+        {
+            count_s ++;
+            if ( count_s == 1 )
+            {
+                if ( check != 4 )
+                {
+                    cout <<"INCORRECT";
+                    return 0;
+                }
+            }
+            else
+            {
+                if ( check != 2 )
+                {
+                    cout <<"INCORRECT";
+                    return 0;
+                }
+            }
+            check = 0;
+        }
+        else
+        {
+            check ++;
+            if ( count_s == 0 )
+                year = year * 10 + s[i] - 48;
+            else if ( count_s == 1 )
+                month = month * 10 + s[i] - 48;
+            else day = day * 10 + s[i] - 48;
+        }
+        if ( count_s > 3 || month > 12 || day > 31 )
+        {
+            cout << "INCORRECT";
+            return 0;
+        }
+    }
+    if ( check == 2 && count_s == 2 && (month >= 1 && month <= 12) && (day >= 1 && day <= 31) )
+        cout << year <<" "<< month <<" "<< day;
+    else cout << "INCORRECT";
+}

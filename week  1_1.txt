@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int a, b;
+
+int main()
+{
+    //Week 1 - Add Subtract Multiplication Division of A and B
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> a >> b;
+    cout << a+b <<" "<< a-b <<" "<< a*b <<" "<< a/b;
+}

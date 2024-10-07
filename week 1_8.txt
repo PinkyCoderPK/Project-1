@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n;
+
+int main()
+{
+    //Week 1 - List all numbers from 1 to n and its squares
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cout << i <<" "<< i*i <<"\n";
+}

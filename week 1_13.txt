@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s1, s2, s3;
+
+int main()
+{
+    //Week 1 - Text Replacement
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    getline(cin,s1);
+    getline(cin,s2);
+    getline(cin,s3);
+    //cout << s1 <<"\n" << s2 <<"\n"<< s3;
+    while ( s3.find(s1) != -1 )
+    {
+        s3.replace(s3.find(s1),s1.size(),s2);
+    }
+    cout << s3;
+}

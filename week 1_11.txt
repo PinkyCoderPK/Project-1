@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+double a, b, c;
+
+int main()
+{
+    //Week 1 - Solve degree-2 polynomial equation
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> a >> b >> c;
+    double delta = b*b - 4*a*c;
+    if ( delta < 0 ) cout << "NO SOLUTION";
+    else if ( delta == 0 ) cout << fixed << setprecision(2) << -b/(2*a);
+    else cout << fixed << setprecision(2) << (-b-sqrt(delta))/(2*a) <<" "<< (-b+sqrt(delta))/(2*a);
+}
