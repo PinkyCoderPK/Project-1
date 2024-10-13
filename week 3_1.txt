@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s;
+int k, root;
+pair<int,int> tree[1000005];
+bool d[1000005];
+
+void movePre(int u)
+{
+    d[u] = 1;
+    cout << u <<" ";
+    if ( !d[tree[u].first] ) movePre(tree[u].first);
+    if ( !d[tree[u].second] ) movePre(tree[u].second);
+}
+
+void insertNode(int u,int v)
+{
+    if ( u == v ) return;
+    if ( v < u )
+    {
+        if ( !tree[u].first ) tree[u].first = v;
+        else insertNode(tree[u].first, v);
+    }
+    else
+    {
+        if ( !tree[u].second ) tree[u].second = v;
+        else insertNode(tree[u].second, v);
+    }
+}
+
+int main()
+{
+    //Week 3 - BST - Insertion and PreOrder Traversal
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int check = 0;
+    d[0] = 1;
+    while ( cin >> s >> k )
+    {
+        if ( s == "#" ) break;
+        if ( !check )
+        {
+            root = k;
+            check = 1;
+            continue;
+        }
+        insertNode(root,k);
+    }
+    movePre(root);
+}

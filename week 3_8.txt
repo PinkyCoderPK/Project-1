@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+#define ii pair<int,int>
+#define fi first
+#define se second
+using namespace std;
+
+int a, b, c;
+int f[2005][2005];
+int ans = 1e9;
+
+void solve()
+{
+    for (int i = 0; i <= 1000; i++)
+        for (int j = 0; j <= 1000; j++)
+            f[i][j] = 1e9;
+    queue<ii> q;
+    q.push({0, 0});
+    f[0][0] = 0;
+    while ( !q.empty() )
+    {
+        ii top = q.front();
+        q.pop();
+        if ( f[top.fi][0] > f[top.fi][top.se] + 1 )
+        {
+            f[top.fi][0] = f[top.fi][top.se] + 1;
+            q.push({top.fi, 0});
+        }
+        if ( f[0][top.se] > f[top.fi][top.se] + 1 )
+        {
+            f[0][top.se] = f[top.fi][top.se] + 1;
+            q.push({0, top.se});
+        }
+
+        if ( f[a][top.se] > f[top.fi][top.se] + 1 )
+        {
+            f[a][top.se] = f[top.fi][top.se] + 1;
+            q.push({a, top.se});
+        }
+        if ( f[top.fi][b] > f[top.fi][top.se] + 1 )
+        {
+            f[top.fi][b] = f[top.fi][top.se] + 1;
+            q.push({top.fi, b});
+        }
+
+        if ( f[top.fi+min(a-top.fi,top.se)][max (top.se-min(a-top.fi,top.se), 0)]
+            > f[top.fi][top.se] + 1 ) // b -> a
+        {
+            f[top.fi+min(a-top.fi,top.se)][max (top.se-min(a-top.fi,top.se), 0)] = f[top.fi][top.se] + 1;
+            q.push({top.fi+min(a-top.fi,top.se), max (top.se-min(a-top.fi,top.se), 0)});
+        }
+        if ( f[max(0, top.fi-min(b-top.se, top.fi))][top.se+min(b-top.se, top.fi)]
+            > f[top.fi][top.se] + 1 ) // a -> b
+        {
+            f[max(0, top.fi-min(b-top.se, top.fi))][top.se+min(b-top.se, top.fi)] = f[top.fi][top.se] + 1;
+            q.push({max(0, top.fi-min(b-top.se, top.fi)), top.se+min(b-top.se, top.fi)});
+        }
+    }
+}
+
+int main()
+{
+    // Week 3 - WATER JUGS
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> a >> b >> c;
+    solve();
+    for (int i = 0; i <= 1000; i++)
+        ans = min ({ans, f[i][c], f[c][i]});
+
+    if ( ans == 1e9 ) cout << -1;
+    else cout << ans;
+}

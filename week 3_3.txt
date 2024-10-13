@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string a, b;
+map<string, vector<string> > g;
+int gen = 0;
+
+int countDescendants(string x)
+{
+    int ans = 1;
+    for (auto v : g[x])
+        ans += countDescendants(v);
+    return ans;
+}
+
+void countGeneration(string x,int k)
+{
+    for (auto v : g[x])
+    {
+        gen = max ( gen, k+1 );
+        countGeneration(v, k+1);
+    }
+}
+
+int main()
+{
+    // Week 3 - Family Tree
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    while ( cin >> a )
+    {
+        if ( a == "***" ) break;
+        cin >> b;
+        g[b].push_back(a);
+    }
+    while ( cin >> a )
+    {
+        if ( a == "***" ) break;
+        cin >> b;
+        if ( a == "descendants" )
+        {
+            cout << countDescendants(b) - 1 <<"\n";
+        }
+        else
+        {
+            gen = 0;
+            countGeneration(b, 0);
+            cout << gen <<"\n";
+        }
+    }
+}

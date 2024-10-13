@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string s;
+stack<char> a;
+
+int main()
+{
+    // Week 3 - Check Parenthesis
+    //freopen("code.inp","r",stdin);
+    //freopen("code.out","w",stdout);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    cin >> s;
+    for (auto v : s)
+    {
+        if ( v == '(' || v == '[' || v == '{' ) a.push(v);
+        else
+        {
+            if ( a.empty()
+                || (a.top() == '(' && v != ')')
+                || (a.top() == '['&& v != ']')
+                || (a.top() == '{'&& v != '}') )
+            {
+                cout << 0;
+                return 0;
+            }
+            a.pop();
+        }
+    }
+    if ( a.empty() ) cout << 1;
+    else cout << 0;
+}
